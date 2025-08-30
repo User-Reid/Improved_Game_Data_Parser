@@ -1,0 +1,14 @@
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\bin\Debug\net8.0\Improved_Game_Data_Parser.exe
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\bin\Debug\net8.0\Improved_Game_Data_Parser.deps.json
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\bin\Debug\net8.0\Improved_Game_Data_Parser.runtimeconfig.json
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\bin\Debug\net8.0\Improved_Game_Data_Parser.dll
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\bin\Debug\net8.0\Improved_Game_Data_Parser.pdb
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.AssemblyInfoInputs.cache
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.AssemblyInfo.cs
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.csproj.CoreCompileInputs.cache
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.dll
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\refint\Improved_Game_Data_Parser.dll
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.pdb
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.genruntimeconfig.cache
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\ref\Improved_Game_Data_Parser.dll
