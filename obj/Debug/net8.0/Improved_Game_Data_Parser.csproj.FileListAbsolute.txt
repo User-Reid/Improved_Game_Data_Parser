@@ -12,3 +12,4 @@ C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debu
 C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.pdb
 C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.genruntimeconfig.cache
 C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\ref\Improved_Game_Data_Parser.dll
+C:\Users\aerma\Downloads\UT-Bootcamp\Udemy\C#\Improved_Game_Data_Parser\obj\Debug\net8.0\Improved_Game_Data_Parser.sourcelink.json
