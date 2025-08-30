@@ -39,27 +39,45 @@
 
 //   public override string ToString() => $"{Title}; Which was released in {ReleaseYear} and was rated a {Rating}/5.";
 // }
-
 using System.Text.Json;
 
-System.Console.WriteLine("What file would you like to read from big dog?");
-var filePath = Console.ReadLine();
-var readContentsOfFilePath = File.ReadAllText(filePath);
-var reincarnatedObject = JsonSerializer.Deserialize<List<VideoGame>>(readContentsOfFilePath);
+System.Console.WriteLine("What file would you like to read from?");
+string filePath = Console.ReadLine();
+string fileContents;
 
-if (reincarnatedObject.Count > 0)
+if (File.Exists(filePath))
 {
-  foreach (VideoGame videoGame in reincarnatedObject)
+  fileContents = File.ReadAllText(filePath);
+}
+else
+{
+  WritingEmptyFiles.WriteFile(filePath);
+  fileContents = File.ReadAllText(filePath);
+}
+
+var videoGameList = JsonSerializer.Deserialize<List<VideoGame>>(fileContents);
+
+if (videoGameList.Count > 0)
+{
+  foreach (VideoGame videoGame in videoGameList)
   {
     System.Console.WriteLine(videoGame);
   }
 }
 else
 {
-  System.Console.WriteLine("You aint got shit in here homie.");
+  System.Console.WriteLine("You aint got shit in here homie💀");
 }
 
 Console.ReadKey();
+
+public static class WritingEmptyFiles
+{
+  public static void WriteFile(string filePath)
+  {
+    File.WriteAllText(filePath, "[]");
+  }
+}
 
 public class VideoGame
 {
@@ -74,5 +92,5 @@ public class VideoGame
     Rating = rating;
   }
 
-  public override string ToString() => $"{Title}; Which was release in {ReleaseYear} and was rated a {Rating}/5";
+  public override string ToString() => $"{Title}; Which was release in {ReleaseYear} and {Rating}.5";
 }
