@@ -18,64 +18,127 @@ Console.ReadKey();
 
 public class GameDataParserApp
 {
+  private readonly IUserInteractor _userInteractor;
+  private readonly IGamesPrinter _gamesPrinter;
+  private readonly IVideoGamesDeserializer _videoGamesDeserializer;
+  public GameDataParserApp(IUserInteractor userInteractor, IGamesPrinter gamesPrinter, IVideoGamesDeserializer videoGamesDeserializer)
+  {
+    _userInteractor = userInteractor;
+    _gamesPrinter = gamesPrinter;
+    _videoGamesDeserializer = videoGamesDeserializer;
+  }
   public void Run()
   {
-    bool isFileRead = false;
-var fileContents = default(string);
-var fileName = default(string);
+    string fileName = _userInteractor.ReadValidFilePath();
 
-do
-{
-      if (fileName is null)
+    var fileContents = File.ReadAllText(fileName);
+    var videoGames = _videoGamesDeserializer.DeserializeFrom(fileName, fileContents);
+    _gamesPrinter.Print(videoGames);
+  }
+
+  public interface IVideoGamesDeserializer
+  {
+    public List<VideoGame> DeserializeFrom(string fileName, string fileContents);
+  }
+
+  public class VideoGamesDeserializer : IVideoGamesDeserializer
+  {
+    private readonly IUserInteractor _userInteractor;
+
+    public VideoGamesDeserializer(IUserInteractor userInteractor)
+    {
+      _userInteractor = userInteractor;
+    }
+    public List<VideoGame> DeserializeFrom(string fileName, string fileContents)
+    {
+      try
       {
-        System.Console.WriteLine("The file name cannot be null");
+        return JsonSerializer.Deserialize<List<VideoGame>>(fileContents);
       }
-      else if (fileName == string.Empty)
+      catch (JsonException ex)
       {
-        System.Console.WriteLine("The file name cannot be empty");
+        _userInteractor.PrintError($"JSON in {fileName} file was not\r\nin a valid format. JSON body:");
+        _userInteractor.PrintError($"{fileContents}");
+        throw new JsonException($"{ex.Message} The file is: {fileName}", ex);
       }
-      else if (!File.Exists(fileName))
+    }
+  }
+
+  public interface IGamesPrinter
+  {
+    void Print(List<VideoGame> videoGames);
+  }
+
+  public class GamesPrinter : IGamesPrinter
+  {
+    private readonly IUserInteractor _userInteractor;
+    public GamesPrinter(IUserInteractor userInteractor)
+    {
+      _userInteractor = userInteractor;
+    }
+    public void Print(List<VideoGame> videoGames)
+    {
+      if (videoGames.Count > 0)
       {
-        System.Console.WriteLine("The file does not exist");
+        _userInteractor.PrintMessage(Environment.NewLine + "Loaded games are:");
+        foreach (VideoGame videoGame in videoGames)
+        {
+          _userInteractor.PrintMessage(videoGame.ToString());
+          _userInteractor.PrintMessage("XXXXXXXX");
+        }
       }
       else
       {
-        fileContents = File.ReadAllText(fileName);
-        isFileRead = true;
+        System.Console.WriteLine("No games are present in the input file.");
       }
-} while (!isFileRead);
+    }
+  }
 
-List<VideoGame> videoGames = default;
-try
-{
-  videoGames = JsonSerializer.Deserialize<List<VideoGame>>(fileContents);
-}
-catch (JsonException ex)
-{
-  var originalColor = Console.ForegroundColor;
-  Console.ForegroundColor = ConsoleColor.Red;
-  Console.WriteLine($"JSON in {fileName} file was not\r\nin a valid format. JSON body:");
-  System.Console.WriteLine($"{fileContents}");
-  Console.ForegroundColor = originalColor;
-  
-  throw new JsonException($"{ex.Message} The file is: {fileName}", ex);
-}
-
-if (videoGames.Count > 0)
-{
-  System.Console.WriteLine();
-  System.Console.WriteLine("Loaded games are:");
-  foreach (VideoGame videoGame in videoGames)
+  public interface IUserInteractor
   {
-    System.Console.WriteLine(videoGame);
-    System.Console.WriteLine("XXXXXXXX");
+    string ReadValidFilePath();
+    void PrintMessage(string message);
+    void PrintError(string message);
   }
+  public class ConsoleUserInteractor : IUserInteractor {
+    public void PrintMessage(string message)
+    {
+        System.Console.WriteLine(message);
+      }
+
+    public void PrintError(string message)
+    {
+            var originalColor = Console.ForegroundColor;
+      Console.ForegroundColor = ConsoleColor.Red;
+      System.Console.WriteLine(message);
+      Console.ForegroundColor = originalColor;
+    }
+       public string ReadValidFilePath()
+    {
+      bool isFilePathValid = false;
+      var fileName = default(string);
+      do
+      {
+        if (fileName is null)
+        {
+          System.Console.WriteLine("The file name cannot be null");
+        }
+        else if (fileName == string.Empty)
+        {
+          System.Console.WriteLine("The file name cannot be empty");
+        }
+        else if (!File.Exists(fileName))
+        {
+          System.Console.WriteLine("The file does not exist");
+        }
+        else
+        {
+          isFilePathValid = true;
+        }
+      } while (!isFilePathValid);
+      return fileName;
+    }
 }
-else
-{
-  System.Console.WriteLine("No games are present in the input file.");
-}
-  }
 }
 
 public class VideoGame
